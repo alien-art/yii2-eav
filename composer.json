@@ -11,8 +11,12 @@
   ],
   "repositories": [
 		{
-            "type": "git",
-            "url": "https://github.com/alien-art/yii2-jquery-formbuilder"
+            "type": "vcs",
+            "url": "d:/work/YII2-EXT/yii2-jquery-formbuilder"
+        },
+		{
+            "type": "vcs",
+            "url": "d:/work/YII2-EXT/formbuilder"
         }
     ],
   "type": "yii2-extension",
