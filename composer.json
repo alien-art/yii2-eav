@@ -43,7 +43,8 @@
   "require": {
     "php": ">=5.5.0",
     "yiisoft/yii2": "*",
-	"alien/yii2-jquery-formbuilder": "*"
+	"alien/yii2-jquery-formbuilder": "*",
+        "sunra/php-simple-html-dom-parser": "1.5.1"
   },
   "autoload": {
     "psr-4": {
