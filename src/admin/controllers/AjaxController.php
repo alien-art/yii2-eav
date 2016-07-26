@@ -18,7 +18,7 @@ use yii\web\Controller;
 class AjaxController extends Controller
 {
 
-    public function actionIndex()
+    /*public function actionIndex()
     {
         Yii::$app->response->format = 'json';
 
@@ -38,7 +38,7 @@ class AjaxController extends Controller
         }
 
         return ['status' => $status, 'types' => $attribuites];
-    }
+    }*/
 
     public function actionSave()
     {
@@ -46,109 +46,52 @@ class AjaxController extends Controller
 
             $post = Yii::$app->request->post();
 
-            if ($post['payload'] && $post['entityModel']) {
-
-                $payload = Json::decode($post['payload']);
-
-                if (!isset($payload['fields'])) {
-                    return;
-                }
-
+            if ($post['form'] && $post['entityname'] && $post['entitymodel']) {
                 $transaction = \Yii::$app->db->beginTransaction();
 
+                $entityModel = str_replace('/','\\', $post['entitymodel']);
+                $entityName = $post['entityname'];
+                
                 try {
-
-                    $categoryId = isset($post['categoryId']) ? $post['categoryId'] : 0;
-
                     $entityId = EavEntity::find()
-                        ->select(['id'])
-                        ->where([
-                            'entityModel' => $post['entityModel'],
-                            'categoryId' => $categoryId,
-                        ])->scalar();
-
-                    if (!$entityId) {
-                        $entity = new EavEntity;
-                        $entity->entityName = isset($post['entityName']) ? $post['entityName'] : 'Untitled';
-                        $entity->entityModel = $post['entityModel'];
-                        //$entity->categoryId = $categoryId;
+                            ->select(['id'])
+                            ->where(['entityModel'=>$entityModel])
+                            ->scalar();
+                    
+                    if($entityId)
+                    {
+                        //$entityId = $entityId;
+                        EavAttribute::deleteAll('entityId = '.$entityId);
+                    }
+                    else {
+                        $entity = new EavEntity();
+                        
+                        $entity->entityModel = $entityModel;
+                        $entity->entityName = $entityName;
+                        
                         $entity->save(false);
                         $entityId = $entity->id;
                     }
-
-                    $attributes = [];
-
-                    foreach ($payload['fields'] as $order => $field) {
-
-                        // Attribute
-                        $attribute = EavAttribute::findOne(['name' => $field['cid'], 'entityId' => $entityId]);
-                        if (!$attribute) {
-                            $attribute = new EavAttribute;
-                            $lastId = EavAttribute::find()->select(['id'])->orderBy(['id' => SORT_DESC])->limit(1)->scalar() + 1;
-                            $attribute->name = 'c' . $lastId;
-                        }
-
-                        $attribute->type = $field['group_name'];
+                    
+                   $xml = simplexml_load_string($post['form']);
+                   foreach ($xml->fields->field as $field)
+                   {
+                        $attribute = new EavAttribute();
                         $attribute->entityId = $entityId;
-                        $attribute->typeId = EavAttributeType::find()->select(['id'])->where(['name' => $field['field_type']])->scalar();
-                        $attribute->label = $field['label'];
-                        $attribute->order = $order;
-                        $attribute->description = isset($field['field_options']['description']) ? $field['field_options']['description'] : '';
-                        $attribute->save(false);
+                        $attribute->label = $this->xml_attribute($field, 'label'); 
+                        $attribute->name = $this->xml_attribute($field, 'name'); 
+                        $attribute->description = $this->xml_attribute($field, 'description');
 
-                        $attributes[] = $attribute->id;
-
-                        // Rule
-                        if (isset($field['field_options'])) {
-                            $rule = EavAttributeRule::find()->where(['attributeId' => $attribute->id])->one();
-                            if (!$rule) {
-                                $rule = new EavAttributeRule();
-                            }
-                            $rule->required = (int)$field['required'];
-                            $rule->visible = (int)$field['visible'];
-                            $rule->locked = (int)$field['locked'];
-                            $rule->attributeId = $attribute->id;
-                            foreach ($field['field_options'] as $key => $param) {
-                                $rule->{$key} = $param;
-                            }
-                            $rule->save();
-                        }
-
-                        if (isset($field['field_options']['options'])) {
-
-                            $options = [];
-
-                            foreach ($field['field_options']['options'] as $k => $o) {
-
-                                $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id, 'value' => $o['label']])->one();
-                                if (!$option) {
-                                    $option = new EavAttributeOption;
-                                }
-                                $option->attributeId = $attribute->id;
-                                $option->value = $o['label'];
-                                $option->defaultOptionId = (int)$o['checked'];
-                                $option->order = $k;
-                                $option->save();
-
-                                $options[] = $option->value;
-                            }
-
-                            EavAttributeOption::deleteAll([
-                                'and',
-                                ['attributeId' => $attribute->id],
-                                ['NOT', ['IN', 'value', $options]]
-                            ]);
-
-                        }
-
+                        $attribute->typeId = EavAttributeType::find()
+                                    ->select('id')
+                                    ->where(['name'=>$this->xml_attribute($field, 'type')])
+                                    ->scalar();
+                        var_dump($attribute->typeId);
+                        if (!$attribute->save()) 
+                                var_dump($attribute->errors);
                     }
-
-                    EavAttribute::deleteAll(['NOT', ['IN', 'id', $attributes]]);
-                    EavAttributeValue::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
-                    EavAttributeOption::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
-                    EavAttributeRule::deleteAll(['NOT', ['IN', 'attributeId', $attributes]]);
-
                     $transaction->commit();
+                    echo "Атрибуты сохранены";
 
                 } catch (\Exception $e) {
                     $transaction->rollBack();
@@ -159,6 +102,12 @@ class AjaxController extends Controller
 
 
         }
+    }
+
+   protected function xml_attribute($object, $attribute)
+    {
+    if(isset($object[$attribute]))
+        return (string) $object[$attribute];
     }
 
 }
