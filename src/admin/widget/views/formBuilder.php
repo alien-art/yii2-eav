@@ -130,7 +130,7 @@ $js_form_builder = <<<JS
         $.ajax({
         type: "POST",
         url: "$url",
-        data: "entitymodel=$entityModel&entityname=$entityName&form="+formData,
+        data: "entityid=$entityId&entitymodel=$entityModel&entityname=$entityName&form="+formData,
         success: function(msg){
           $.pjax.reload({container:'#from_attributes'});
           $('#from_attributes').focus();

@@ -12,6 +12,7 @@ class formBuilder extends Widget
     public $url = "";
     public $entityName = "";
     public $entityModel = "";
+    public $entityId = 1;
     public $attributes;
 
     public function init()
@@ -27,6 +28,7 @@ class formBuilder extends Widget
             'url' => $this->url,
             'entityModel' => str_replace('\\','/', $this->entityModel),
             'entityName' => $this->entityName,
+            'entityId' => $this->entityId,
             'attributes' => $this->load_attributes()
         ]);
     }

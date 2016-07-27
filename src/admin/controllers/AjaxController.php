@@ -51,11 +51,14 @@ class AjaxController extends Controller
 
                 $entityModel = str_replace('/','\\', $post['entitymodel']);
                 $entityName = $post['entityname'];
+                //$entity_id = $post['entityid'];
                 
                 try {
                     $entityId = EavEntity::find()
                             ->select(['id'])
-                            ->where(['entityModel'=>$entityModel])
+                            ->where([
+                            //    'categoryId' => $entityid,
+                                'entityModel'=>$entityModel,])
                             ->scalar();
                     
                     if($entityId)
@@ -68,6 +71,7 @@ class AjaxController extends Controller
                         
                         $entity->entityModel = $entityModel;
                         $entity->entityName = $entityName;
+                        //$entity->categoryId = $entityid;
                         
                         $entity->save(false);
                         $entityId = $entity->id;
