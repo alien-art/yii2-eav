@@ -119,7 +119,7 @@ class EavAttribute extends \yii\db\ActiveRecord
 
     public function getRequired()
     {
-        return $this->eavAttributeRule->required;
+        return ($this->eavAttributeRule !== null)?$this->eavAttributeRule->required:0;
     }
 
     public function getbootstrapData()
