@@ -61,12 +61,8 @@ class AjaxController extends Controller
                                 'entityModel'=>$entityModel,])
                             ->scalar();
                     
-                    if($entityId)
+                    if(!$entityId)
                     {
-                        //$entityId = $entityId;
-                        EavAttribute::deleteAll('entityId = '.$entityId);
-                    }
-                    else {
                         $entity = new EavEntity();
                         
                         $entity->entityModel = $entityModel;
@@ -78,22 +74,60 @@ class AjaxController extends Controller
                     }
                     
                    $xml = simplexml_load_string($post['form']);
+                   $attributes = [];
+                   $order_a = 0;
                    foreach ($xml->fields->field as $field)
                    {
-                        $attribute = new EavAttribute();
+                         $attribute = EavAttribute::findOne(['name' => $this->xml_attribute($field, 'name'), 'entityId' => $entityId]);
+                        if (!$attribute) {
+                            $attribute = new EavAttribute;
+                        }
+
                         $attribute->entityId = $entityId;
                         $attribute->label = $this->xml_attribute($field, 'label'); 
                         $attribute->name = $this->xml_attribute($field, 'name'); 
                         $attribute->description = $this->xml_attribute($field, 'description');
+                        $attribute->order = $order_a;
 
                         $attribute->typeId = EavAttributeType::find()
                                     ->select('id')
                                     ->where(['name'=>$this->xml_attribute($field, 'type')])
                                     ->scalar();
-                        var_dump($attribute->typeId);
+                        
                         if (!$attribute->save()) 
                                 var_dump($attribute->errors);
+                        
+                        $order_a++;
+                        
+                        $attributes[] = $attribute->id;
+                        if (isset($field->option)) 
+                        {
+                            $options = [];
+                            $order = 0;
+                            foreach ($field->option as $k=>$o) {
+                                $option = EavAttributeOption::find()->where(['attributeId' => $attribute->id, 'value' => $this->xml_attribute($o, 'value')])->one();
+                                if (!$option) {
+                                    $option = new EavAttributeOption;
+                                }
+                                $option->attributeId = $attribute->id;
+                                $option->value = $this->xml_attribute($o, 'value');
+                                $option->order = $order;
+                                if (!$option->save())
+                                    var_dump($option->errors);
+                                
+                                $order ++;
+                                $options[] = $option->value;
+                            }
+                            
+                           EavAttributeOption::deleteAll([
+                                'and',
+                                ['attributeId' => $attribute->id],
+                                ['NOT', ['IN', 'value', $options]]
+                            ]);
+                        }
                     }
+                    
+                    EavAttribute::deleteAll(['NOT', ['IN', 'id', $attributes]]);
                     $transaction->commit();
                     echo "Атрибуты сохранены";
 
