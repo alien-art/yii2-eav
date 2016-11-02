@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model mirocow\eav\models\EavAttributeValue */
+/* @var $model alien\eav\models\EavAttributeValue */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];

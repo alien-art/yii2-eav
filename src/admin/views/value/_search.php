@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model mirocow\eav\models\EavAttributeValueSearch */
+/* @var $model alien\eav\models\EavAttributeValueSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

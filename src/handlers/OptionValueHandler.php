@@ -3,11 +3,11 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\handlers;
+namespace alien\eav\handlers;
 
 /**
  * Class OptionValueHandler
- * @package mirocow\eav
+ * @package alien\eav
  */
 class OptionValueHandler extends ValueHandler
 {

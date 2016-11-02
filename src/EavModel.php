@@ -3,10 +3,10 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace alien\eav;
 
-use mirocow\eav\handlers\AttributeHandler;
-use mirocow\eav\handlers\ValueHandler;
+use alien\eav\handlers\AttributeHandler;
+use alien\eav\handlers\ValueHandler;
 use Yii;
 use yii\base\DynamicModel as BaseEavModel;
 use yii\db\ActiveRecord;
@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
 /**
  * Class EavModel
- * @package mirocow\eav
+ * @package alien\eav
  */
 class EavModel extends BaseEavModel
 {

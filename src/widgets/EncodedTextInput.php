@@ -3,13 +3,13 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\widgets;
+namespace alien\eav\widgets;
 
 use Yii;
 
 class EncodedTextInput extends TextInput
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\ArrayValueHandler';
+    const VALUE_HANDLER_CLASS = '\alien\eav\handlers\ArrayValueHandler';
 
     static $order = 3;
 

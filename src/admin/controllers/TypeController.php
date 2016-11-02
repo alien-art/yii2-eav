@@ -1,9 +1,9 @@
 <?php
 
-namespace mirocow\eav\admin\controllers;
+namespace alien\eav\admin\controllers;
 
-use mirocow\eav\models\EavAttributeType;
-use mirocow\eav\models\EavAttributeTypeSearch;
+use alien\eav\models\EavAttributeType;
+use alien\eav\models\EavAttributeTypeSearch;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

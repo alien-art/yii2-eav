@@ -1,9 +1,9 @@
 <?php
 
-namespace mirocow\eav\widgets;
+namespace alien\eav\widgets;
 
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\EavModel;
+use alien\eav\models\EavAttribute;
+use alien\eav\EavModel;
 use yii\helpers\Html;
 
 class ActiveField extends \yii\widgets\ActiveField
@@ -28,7 +28,7 @@ class ActiveField extends \yii\widgets\ActiveField
     private function renderField($model, $attribute, $options)
     {
         $this->adjustLabelFor($options);
-        $eavModel = EavModel::create(['entityModel' => $model , 'attribute'=>$attribute, 'valueClass'=>\mirocow\eav\models\EavAttributeValue::className()]);
+        $eavModel = EavModel::create(['entityModel' => $model , 'attribute'=>$attribute, 'valueClass'=>\alien\eav\models\EavAttributeValue::className()]);
         $handler = $eavModel->handlers[$attribute];
         $handler->owner->activeForm = $options['form'];
 

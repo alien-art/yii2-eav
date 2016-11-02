@@ -1,5 +1,5 @@
 <?php
-namespace mirocow\eav\admin\assets;
+namespace alien\eav\admin\assets;
 
 use yii\web\AssetBundle;
 
@@ -13,7 +13,7 @@ use yii\web\AssetBundle;
 class JqueryformBuilderAsset extends AssetBundle
 {
     public $baseUrl = '@web';
-    public $sourcePath = '@mirocow/eav/admin/assets/formbuilder';
+    public $sourcePath = '@alien/eav/admin/assets/formbuilder';
     public $css = [
         'css/form-builder.min.css'];
     public $js = [

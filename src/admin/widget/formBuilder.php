@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\admin\widget;
+namespace alien\eav\admin\widget;
 
 use Yii;
 use yii\base\Widget;

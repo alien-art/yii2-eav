@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model mirocow\eav\models\EavEntity */
+/* @var $model alien\eav\models\EavEntity */
 
 $this->title = Yii::t('eav','Update Eav Entity').': ' . ' ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];

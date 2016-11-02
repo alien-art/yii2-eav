@@ -1,6 +1,6 @@
 <?php
 
-use mirocow\eav\admin\assets\JqueryformBuilderAsset;
+use alien\eav\admin\assets\JqueryformBuilderAsset;
 
 /**
  * @var \yii\web\View $this

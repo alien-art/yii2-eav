@@ -1,5 +1,5 @@
 <?php
-use mirocow\eav\handlers\ValueHandler;
+use alien\eav\handlers\ValueHandler;
 use yii\db\Migration;
 
 class m150821_133232_init extends Migration
@@ -22,32 +22,32 @@ class m150821_133232_init extends Migration
             [
                 'name' => 'text',
                 'storeType' => ValueHandler::STORE_TYPE_RAW,
-                'handlerClass' => '\mirocow\eav\widgets\TextInput',
+                'handlerClass' => '\alien\eav\widgets\TextInput',
             ],
             [
                 'name' => 'option',
                 'storeType' => ValueHandler::STORE_TYPE_OPTION,
-                'handlerClass' => '\mirocow\eav\widgets\DropDownList',
+                'handlerClass' => '\alien\eav\widgets\DropDownList',
             ],
             [
                 'name' => 'checkbox',
                 'storeType' => ValueHandler::STORE_TYPE_MULTIPLE_OPTIONS,
-                'handlerClass' => '\mirocow\eav\widgets\CheckBoxList',
+                'handlerClass' => '\alien\eav\widgets\CheckBoxList',
             ],
             [
                 'name' => 'array',
                 'storeType' => ValueHandler::STORE_TYPE_ARRAY,
-                'handlerClass' => '\mirocow\eav\widgets\EncodedTextInput',
+                'handlerClass' => '\alien\eav\widgets\EncodedTextInput',
             ],
             [
                 'name' => 'radio',
                 'storeType' => ValueHandler::STORE_TYPE_OPTION,
-                'handlerClass' => '\mirocow\eav\widgets\RadioList',
+                'handlerClass' => '\alien\eav\widgets\RadioList',
             ],
             [
                 'name' => 'area',
                 'storeType' => ValueHandler::STORE_TYPE_RAW,
-                'handlerClass' => '\mirocow\eav\widgets\Textarea',
+                'handlerClass' => '\alien\eav\widgets\Textarea',
             ],
         ];
     }

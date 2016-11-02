@@ -1,13 +1,13 @@
 <?php
 
-namespace mirocow\eav\admin\controllers;
+namespace alien\eav\admin\controllers;
 
-use mirocow\eav\models\EavAttribute;
-use mirocow\eav\models\EavAttributeOption;
-use mirocow\eav\models\EavAttributeRule;
-use mirocow\eav\models\EavAttributeType;
-use mirocow\eav\models\EavAttributeValue;
-use mirocow\eav\models\EavEntity;
+use alien\eav\models\EavAttribute;
+use alien\eav\models\EavAttributeOption;
+use alien\eav\models\EavAttributeRule;
+use alien\eav\models\EavAttributeType;
+use alien\eav\models\EavAttributeValue;
+use alien\eav\models\EavEntity;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;

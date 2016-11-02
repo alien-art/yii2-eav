@@ -1,13 +1,13 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace alien\eav\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * EavAttributeOptionSearch represents the model behind the search form about `mirocow\eav\models\EavAttributeOption`.
+ * EavAttributeOptionSearch represents the model behind the search form about `alien\eav\models\EavAttributeOption`.
  */
 class EavAttributeOptionSearch extends EavAttributeOption
 {

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model mirocow\eav\models\EavAttributeValue */
+/* @var $model alien\eav\models\EavAttributeValue */
 
 $this->title = Yii::t('eav','Create Eav Attribute Value');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];

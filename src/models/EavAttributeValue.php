@@ -1,8 +1,8 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace alien\eav\models;
 
-use mirocow\eav\models\Eav;
+use alien\eav\models\Eav;
 use Yii;
 
 /**

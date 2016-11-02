@@ -3,15 +3,15 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav;
+namespace alien\eav;
 
-use mirocow\eav\models\EavAttribute;
+use alien\eav\models\EavAttribute;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
 
 /**
  * Class EavBehavior
- * @package mirocow\eav
+ * @package alien\eav
  *
  * @mixin ActiveRecord
  * @property EavModel $eav;

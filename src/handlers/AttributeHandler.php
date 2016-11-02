@@ -3,9 +3,9 @@
  * @author Alexey Samoylov <alexey.samoylov@gmail.com>
  */
 
-namespace mirocow\eav\handlers;
+namespace alien\eav\handlers;
 
-use mirocow\eav\EavModel;
+use alien\eav\EavModel;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\base\Widget;
@@ -13,11 +13,11 @@ use yii\db\ActiveRecord;
 
 /**
  * Class AttributeHandler
- * @package mirocow\eav
+ * @package alien\eav
  */
 class AttributeHandler extends Widget
 {
-    const VALUE_HANDLER_CLASS = '\mirocow\eav\handlers\RawValueHandler';
+    const VALUE_HANDLER_CLASS = '\alien\eav\handlers\RawValueHandler';
     
     /** @var EavModel */
     public $owner;

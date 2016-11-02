@@ -1,6 +1,6 @@
 <?php
 
-namespace mirocow\eav\models;
+namespace alien\eav\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;

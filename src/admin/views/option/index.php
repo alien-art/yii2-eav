@@ -4,7 +4,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel mirocow\eav\models\EavAttributeOptionSearch */
+/* @var $searchModel alien\eav\models\EavAttributeOptionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('eav','Eav Attribute Options');

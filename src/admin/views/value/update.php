@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model mirocow\eav\models\EavAttributeValue */
+/* @var $model alien\eav\models\EavAttributeValue */
 
 $this->title = Yii::t('eav','Update Eav Attribute Value').': ' . ' ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('eav','EAV'), 'url' => ['/eav']];
